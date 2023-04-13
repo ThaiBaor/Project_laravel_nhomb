@@ -34,6 +34,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('signout') }}">Logout</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('listuser') }}">List User</a>
+                    </li>
                     @endguest
                 </ul>
             </div>
@@ -42,7 +45,7 @@
     @guest
     <div></div>
     @else
-    <div class="detail">
+    <!-- <div class="detail">
         <table>
             <tr>
                 <th>Name</th>
@@ -57,7 +60,7 @@
                 <td>{{auth()->user()->password}}</td>
             </tr>
         </table>
-    </div>
+    </div> -->
     @endguest
     @yield('content')
 </body>
