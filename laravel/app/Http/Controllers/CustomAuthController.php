@@ -5,6 +5,7 @@ use Hash;
 use Session;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 //Unknow
 class CustomAuthController extends Controller
@@ -78,5 +79,10 @@ class CustomAuthController extends Controller
         Auth::logout();
 
         return Redirect('login');
+    }
+
+    public function listUser(){
+        $users = DB::table('users')->paginate(5);
+        return view('listUser', compact('users'));
     }
 }
