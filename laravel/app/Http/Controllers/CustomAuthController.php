@@ -5,6 +5,7 @@ use Hash;
 use Session;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 //Unknow
 class CustomAuthController extends Controller
@@ -41,20 +42,26 @@ class CustomAuthController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
+            'phone' => 'required|min:10|max:10',
+            'photo' => 'required|image'
         ]);
-
+        $path = $request->file('photo')->getClientOriginalName();
+        $request->file('photo')->move('image',$path);
         $data = $request->all();
+        $data['photo'] = $path;
         $check = $this->create($data);
-
         return redirect("dashboard")->withSuccess('You have signed-in');
     }
 
+    
     public function create(array $data)
     {
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => Hash::make($data['password'])
+            'password' => Hash::make($data['password']),
+            'phone' => $data['phone'],
+            'photo' => $data['photo'],
         ]);
     }
 
@@ -72,5 +79,10 @@ class CustomAuthController extends Controller
         Auth::logout();
 
         return Redirect('login');
+    }
+
+    public function listUser(){
+        $users = DB::table('users')->paginate(5);
+        return view('listUser', compact('users'));
     }
 }
