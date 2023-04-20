@@ -19,7 +19,7 @@
 	          <td>{{$user->email}}</td>
 	          <td>{{$user->password}}</td>
               <td>{{$user->phone}}</td>
-              <!-- <td><img src="{{url('public/storage/photo/'.$user->photo)}}" style="height: 100px; width: 150px"></td> -->
+              <td><img src="./image/<?php echo $user->photo ?>" style="height: 100px; width: 100px"></td>
 	        </tr>
 	        @endforeach
 	      </tbody>

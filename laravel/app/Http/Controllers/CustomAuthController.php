@@ -45,11 +45,11 @@ class CustomAuthController extends Controller
             'phone' => 'required|min:10|max:10',
             'photo' => 'required|image'
         ]);
-        $path = $request->file('photo')->store('public/photo');
-        $imageUrl = substr($path,strlen('public/'));
+        $path = $request->file('photo')->getClientOriginalName();
+        $request->file('photo')->move('image',$path);
         $data = $request->all();
+        $data['photo'] = $path;
         $check = $this->create($data);
-        $data['photo'] = $imageUrl;
         return redirect("dashboard")->withSuccess('You have signed-in');
     }
 

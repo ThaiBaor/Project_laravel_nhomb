@@ -45,22 +45,24 @@
     @guest
     <div></div>
     @else
-    <!-- <div class="detail">
+    <div class="detail">
         <table>
             <tr>
                 <th>Name</th>
                 <th>Email</th>
                 <th>Phone</th>
+                <th>Photo</th>
                 <th >Password</th>
             </tr>
-            <tr>               
+            <tr>            
                 <td>{{auth()->user()->name}}</td>
                 <td>{{auth()->user()->email}}</td>
                 <td>{{auth()->user()->phone}}</td>
+                <td><img style="height: 200px width: 200px;" src="./image/{{}}<?php echo auth()->user()->photo ?>" alt=""></td>
                 <td>{{auth()->user()->password}}</td>
             </tr>
         </table>
-    </div> -->
+    </div>
     @endguest
     @yield('content')
 </body>
